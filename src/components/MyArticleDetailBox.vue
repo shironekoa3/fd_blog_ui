@@ -2,12 +2,12 @@
   <div class="article-detail-box">
     <h1 v-text="title"></h1>
     <div class="tags">
-      <my-icon class="my-icon" icon="icon-calendar" v-text="date"></my-icon>
-      <my-icon class="my-icon" icon="icon-pinglun" v-text="comment_count"></my-icon>
-      <my-icon class="my-icon" icon="icon-read" v-text="click_count"></my-icon>
-      <my-icon class="my-icon" icon="icon-like" v-text="lick_count"></my-icon>
-      <my-icon class="my-icon" icon="icon-category" v-text="category"></my-icon>
-      <my-icon class="my-icon" icon="icon-tags" v-text="tags.join('、')"></my-icon>
+<!--      <my-icon class="my-icon" icon="icon-calendar" v-text="date"></my-icon>-->
+<!--      <my-icon class="my-icon" icon="icon-pinglun" v-text="comment_count"></my-icon>-->
+<!--      <my-icon class="my-icon" icon="icon-read" v-text="click_count"></my-icon>-->
+<!--      <my-icon class="my-icon" icon="icon-like" v-text="lick_count"></my-icon>-->
+<!--      <my-icon class="my-icon" icon="icon-category" v-text="category"></my-icon>-->
+<!--      <my-icon class="my-icon" icon="icon-tags" v-text="tags.join('、')"></my-icon>-->
     </div>
     <div class="content" v-html="newContent">
 
@@ -88,10 +88,6 @@
   .tags {
     margin: 20px 0;
     color: rgba(0, 0, 0, .6);
-  }
-
-  .tags .my-icon {
-    margin: 0 5px;
   }
 
   .content {

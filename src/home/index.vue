@@ -1,7 +1,7 @@
 <template>
   <div>
     <my-header></my-header>
-    <my-main style="margin-top: 20px"></my-main>
+    <my-main style="margin-top: -150px"></my-main>
     <my-footer></my-footer>
   </div>
 </template>
@@ -21,7 +21,7 @@
 </script>
 
 <style>
-header>.container,
+header>.container>nav,
 section>.container,
 main>.container
 {
@@ -41,11 +41,11 @@ nav
 }
 
 @media screen and (max-width: 800px) {
-  header>.container,
+  header>.container>nav,
   section>.container,
   main>.container
   {
-    width: 95%;
+    width: 100%;
   }
 }
 </style>

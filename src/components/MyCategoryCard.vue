@@ -3,7 +3,6 @@
     <h3>※ 文章分类</h3>
     <hr/>
     <router-link class="category-link" :to="{path: '/', query: {id: 1}}" v-for="(item,i) in categories" :key="i">
-      <my-icon class="my-icon" icon="icon-category" v-text="item"></my-icon>
     </router-link>
   </div>
 </template>
@@ -45,8 +44,4 @@
     color: #2d8cf0;
   }
 
-  .my-icon {
-    font-size: 20px;
-    font-weight: lighter;
-  }
 </style>

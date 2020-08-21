@@ -1,48 +1,102 @@
 <template>
-  <div class="article-box">
-    <div>
-      <router-link class="link" :to="link">
-        <h3 v-text="title" style="display: inline;"></h3>
-      </router-link>
-      <div class="content">
-        <div class="text" v-html="content"></div>
+  <article class="article-box">
+    <div class="article-top-date">
+      <div class="month" v-text="month"></div>
+      <div class="day" v-text="day"></div>
+    </div>
+    <header>
+      <h1 class="article-title">
+        <router-link class="article-title-link" to="" v-text="title"></router-link>
+      </h1>
+      <div class="article-meta">
+        <div class="article-date">
+          <font-awesome-icon icon="calendar-alt"/>
+          <span>发表于</span>
+          <span v-text="date"></span>
+        </div>
+        <div class="article-category">
+          <font-awesome-icon icon="archive"/>
+          <span>分类为</span>
+          <span v-text="category"></span>
+        </div>
+        <div class="article-word-count">
+          <font-awesome-icon icon="file-word"/>
+          <span>字数统计</span>
+          <span v-text="wordCount"></span>
+        </div>
+        <div class="article-visitors-count">
+          <font-awesome-icon icon="eye"/>
+          <span>阅读量</span>
+          <span v-text="click_count"></span>
+        </div>
+      </div>
+    </header>
+    <div class="article-body">
+      <div class="article-img">
+        <img :src="img_url" alt="这里丢失了一张图片" v-if="img_url">
+      </div>
+      <p v-html="htmlContent"></p>
+      <div class="article-btn">
+        <router-link class="article-btn-link" to="">阅读全文</router-link>
       </div>
     </div>
-    <footer>
-      <my-icon class="my-icon" icon="icon-calendar" v-text="date"></my-icon>
-      <my-icon class="my-icon" icon="icon-read" v-text="click_count"></my-icon>
-      <my-icon class="my-icon" icon="icon-tags" v-text="tags.join('、')"></my-icon>
-    </footer>
-  </div>
+  </article>
 </template>
 
 <script>
+  import marked from "marked"
+  let rendererMD = new marked.Renderer();
+  marked.setOptions({
+    renderer: rendererMD,
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false
+  });
+
   export default {
     name: "MyArticleBox",
+    data() {
+      return {
+        title: "",
+        img_url: "",
+        date: "",
+        month: "",
+        day: "",
+        category: "",
+        content: "",
+        click_count: 0
+      }
+    },
+    computed: {
+      wordCount() {
+        return this.content.length;
+      },
+      htmlContent(){
+        return marked(this.content, { sanitize: true });
+      }
+    },
+    mounted() {
+      console.log(this.article);
+      let tempArticle = this.article || {};
+      let tempDate = new Date(tempArticle["articleDate"] || new Date());
+      this.title = tempArticle["articleTitle"] || "UnTitle";
+      this.img_url = tempArticle["articleImage"] || "";
+      this.date = tempDate.Format("yyyy-MM-dd");
+      this.month = tempDate.Format("MM");
+      this.day = tempDate.Format("dd");
+      this.category = tempArticle["categoryName"] || "未分类";
+      this.content = tempArticle["content"] || "";
+      this.click_count = tempArticle["clickCount"] || 0;
+    },
     props: {
-      link: {
-        type: String,
-        default: ""
-      },
-      title: {
-        type: String,
-        default: "Hello World"
-      },
-      content: {
-        type: String,
-        default: ""
-      },
-      date: {
-        type: String,
-        default: "1970-01-01"
-      },
-      click_count: {
-        type: Number,
-        default: 0
-      },
-      tags: {
-        type: Array,
-        default: () => []
+      article: {
+        type: Object,
+        default: () => {
+        }
       }
     }
   }
@@ -50,52 +104,129 @@
 
 <style scoped>
   .article-box {
-    /*background-color: #f00;*/
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
-    padding: 10px 0;
-    max-height: 300px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    color: #555555;
+    padding: 35px;
+    position: relative;
   }
 
-  .link {
+  .article-top-date {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-width: 50px;
+    border-color: #97dffd transparent transparent #97dffd;
+    border-style: solid;
+    border-top-left-radius: 5px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .article-top-date .month {
+    position: absolute;
+    top: -38px;
+    left: -42px;
+    transform: rotate(-45deg);
+    font-size: 16px;
+  }
+
+  .article-top-date .day {
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+    top: -28px;
+    left: -32px;
+    transform: rotate(-45deg);
+  }
+
+  .article-title {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .article-title-link {
+    display: inline-block;
+    color: #444444;
+    word-break: break-word;
+  }
+
+  .article-title-link:hover {
+    transform: scale(1.1);
+  }
+
+  .article-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin: 20px 0;
+  }
+
+  .article-meta > div {
+    margin: 0 10px;
+  }
+
+  .article-date {
+    color: #00a7e0;
+  }
+
+  .article-category {
+    /*color: #ff5d9e;*/
+    color: #fc9f4d;
+  }
+
+  .article-word-count {
     color: #000;
   }
 
-  .link:hover {
-    color: #2d8cf0;
+  .article-visitors-count {
+    color: #ff3f1a;
   }
 
-  h3 {
-    font-size: 26px;
-    font-weight: 400;
-  }
-
-  .article-box .content {
-    margin: 10px 0;
-    max-height: 75px;
-    overflow: hidden;
+  .article-body {
+    line-height: 2;
+    font-size: 16px;
     font-weight: lighter;
   }
-
-  .article-box .text {
-    line-height: 1.5rem;
-    word-break: break-all;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+  .article-img {
+    width: 100%;
+    text-align: center;
+  }
+  .article-body img {
+    width: 100%;
+    border-radius: 5px;
+    /*max-height: 500px;*/
   }
 
-  footer {
-    color: rgba(0, 0, 0, .6);
+  .article-btn {
+    text-align: center;
+    margin-top: 40px;
   }
 
-  footer .my-icon {
-    margin-left: 10px;
+  .article-btn-link {
+    display: inline-block;
+    background-color: #97dffd;
+    padding: 2px 16px;
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 5px;
   }
 
-  footer .my-icon:nth-child(1) {
-    margin-left: 0;
+  .article-btn-link:hover {
+    transform: scale(1.1);
+    background-color: #00B4FF;
   }
 
+  @media screen and (max-width: 650px) {
+    .article-category {
+      display: none;
+    }
+  }
 </style>
