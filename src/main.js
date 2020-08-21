@@ -3,23 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import './assets/utils/highlight.js';
+import './assets/utils/fontawesome.js';
+
 import "./style/common.css"
+import "./style/hljs.css"
 import * as api from "./api/api"
+
 Vue.prototype.api = api;
-// 导入Font Awesome
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon, FontAwesomeLayers, FontAwesomeLayersText }
-  from '@fortawesome/vue-fontawesome'
-library.add(fas, far, fab)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon);
-Vue.component('font-awesome-layers', FontAwesomeLayers);
-Vue.component('font-awesome-layers-text', FontAwesomeLayersText);
-
-
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
@@ -28,4 +19,4 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-})
+});

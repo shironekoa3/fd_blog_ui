@@ -35,26 +35,35 @@
       <div class="article-img">
         <img :src="img_url" alt="这里丢失了一张图片" v-if="img_url">
       </div>
-      <p v-html="htmlContent"></p>
+      <p class="article-content" v-html="htmlContent" v-highlight></p>
       <div class="article-btn">
         <router-link class="article-btn-link" to="">阅读全文</router-link>
       </div>
     </div>
   </article>
 </template>
-
 <script>
   import marked from "marked"
-  let rendererMD = new marked.Renderer();
+
+  // let rendererMD = new marked.Renderer();
   marked.setOptions({
-    renderer: rendererMD,
-    gfm: true,
-    tables: true,
-    breaks: false,
-    pedantic: false,
-    sanitize: false,
-    smartLists: true,
-    smartypants: false
+    "baseUrl": null,
+    "breaks": false,
+    "gfm": true,
+    "headerIds": true,
+    "headerPrefix": "",
+    "highlight": null,
+    "langPrefix": "language-",
+    "mangle": true,
+    "pedantic": false,
+    "sanitize": false,
+    "sanitizer": null,
+    "silent": false,
+    "smartLists": false,
+    "smartypants": false,
+    "tokenizer": null,
+    "walkTokens": null,
+    "xhtml": false
   });
 
   export default {
@@ -75,12 +84,12 @@
       wordCount() {
         return this.content.length;
       },
-      htmlContent(){
-        return marked(this.content, { sanitize: true });
+      htmlContent() {
+        let end = this.content.indexOf("<!-- more -->");
+        return marked(end > 0 ? this.content.substring(0, end) : this.content, {sanitize: false});
       }
     },
     mounted() {
-      console.log(this.article);
       let tempArticle = this.article || {};
       let tempDate = new Date(tempArticle["articleDate"] || new Date());
       this.title = tempArticle["articleTitle"] || "UnTitle";
@@ -111,6 +120,7 @@
     color: #555555;
     padding: 35px;
     position: relative;
+    max-width: 1100px;
   }
 
   .article-top-date {
@@ -195,14 +205,21 @@
     font-size: 16px;
     font-weight: lighter;
   }
+
   .article-img {
     width: 100%;
     text-align: center;
   }
+
   .article-body img {
     width: 100%;
     border-radius: 5px;
     /*max-height: 500px;*/
+  }
+
+  .article-content {
+    width: 100%;
+    overflow: hidden;
   }
 
   .article-btn {

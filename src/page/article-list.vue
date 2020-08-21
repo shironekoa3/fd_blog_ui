@@ -63,5 +63,10 @@
     margin-top: 0;
   }
 
+  @media screen and (max-width: 800px){
+    .article-boxes {
+      width: 100%;
+    }
+  }
 
 </style>

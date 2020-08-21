@@ -1,0 +1,46 @@
+/* 代码高亮插件 显示行号 */
+.hljs {
+  position: relative;
+  text-align: left;
+  padding: 7px 2px 7px 50px;
+  font-size: 16px;
+  font-weight: 100;
+  line-height: 1.8;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 7px;
+  bottom: 7px;
+  left: 0;
+  font-size: 100%;
+  width: 40px;
+  text-align: center;
+  letter-spacing: -1px;
+  border-right: 1px solid rgba(0, 0, 0, 0.66);
+  user-select: none;
+  counter-reset: linenumber;
+}
+
+.line-numbers-rows span {
+  pointer-events: none;
+  display: block;
+  counter-increment: linenumber;
+
+}
+
+.line-numbers-rows span:before {
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  text-align: center;
+
+}
+
+.line-numbers-rows span:before code {
+  display: block;
+  margin: 0 10px;
+}
