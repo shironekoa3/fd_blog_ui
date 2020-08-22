@@ -27,7 +27,8 @@ Vue.directive('highlight', el => {
       linesNum += "</span>";
       // console.log(linesNum);
 
-      block.innerHTML = preCode.replace(/&amp;/g, "&");
+      hl.highlightBlock(block);
+      // block.innerHTML = preCode.replace(/&amp;/g, "&");
       block.parentNode.className = "hljs";
       block.parentNode.innerHTML += (linesNum);
 

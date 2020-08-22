@@ -6,7 +6,7 @@
     </div>
     <header>
       <h1 class="article-title">
-        <router-link class="article-title-link" to="" v-text="title"></router-link>
+        <router-link class="article-title-link" :to="path" v-text="title"></router-link>
       </h1>
       <div class="article-meta">
         <div class="article-date">
@@ -37,7 +37,7 @@
       </div>
       <p class="article-content" v-html="htmlContent" v-highlight></p>
       <div class="article-btn">
-        <router-link class="article-btn-link" to="">阅读全文</router-link>
+        <router-link class="article-btn-link" :to="path" >阅读全文</router-link>
       </div>
     </div>
   </article>
@@ -70,6 +70,7 @@
     name: "MyArticleBox",
     data() {
       return {
+        id: 1,
         title: "",
         img_url: "",
         date: "",
@@ -77,7 +78,8 @@
         day: "",
         category: "",
         content: "",
-        click_count: 0
+        click_count: 0,
+        path: "/article/1"
       }
     },
     computed: {
@@ -92,6 +94,8 @@
     mounted() {
       let tempArticle = this.article || {};
       let tempDate = new Date(tempArticle["articleDate"] || new Date());
+      this.id = tempArticle["articleId"] || 1;
+      this.path = "/article/" + this.id;
       this.title = tempArticle["articleTitle"] || "UnTitle";
       this.img_url = tempArticle["articleImage"] || "";
       this.date = tempDate.Format("yyyy-MM-dd");

@@ -9,14 +9,20 @@ import './assets/utils/fontawesome.js';
 import "./style/common.css"
 import "./style/hljs.css"
 import * as api from "./api/api"
+import {getArticles, getArticleById} from "@/assets/articles";
+import {scrollAnimation} from "./assets/extra"
 
+Vue.prototype.scrollAnimation = scrollAnimation;
+Vue.prototype.getArticles = getArticles;
+Vue.prototype.getArticleById = getArticleById;
 Vue.prototype.api = api;
 Vue.config.productionTip = false;
+getArticles();
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 });

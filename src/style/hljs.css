@@ -2,12 +2,16 @@
 .hljs {
   position: relative;
   text-align: left;
-  padding: 7px 2px 7px 50px;
+  padding: 7px 2px 7px 25px;
   font-size: 16px;
   font-weight: 100;
   line-height: 1.8;
   border-radius: 5px;
   width: 100%;
+
+}
+.hljs code {
+  padding-top: 0;
 }
 
 .line-numbers-rows {

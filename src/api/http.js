@@ -5,8 +5,8 @@ axios.defaults.timeout = 10000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded';
 
 export default {
-  get(url, params = {}) {
-    return new Promise((resolve, reject) => {
+  async get(url, params = {}) {
+    return await new Promise((resolve, reject) => {
       axios.get(url, params).then(res => {
         resolve(res.data)
       }).catch(error => {
@@ -14,8 +14,8 @@ export default {
       })
     })
   },
-  post(url, params = {}) {
-    return new Promise((resolve, reject) => {
+  async post(url, params = {}) {
+    return await new Promise((resolve, reject) => {
       axios.post(url, params).then(res => {
         resolve(res.data)
       }).catch(error => {

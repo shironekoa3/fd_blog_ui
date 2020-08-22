@@ -1,12 +1,13 @@
 <template>
   <section>
     <div class="container">
-      <div class="article-boxes">
+      <div tag="div" class="article-boxes">
         <my-article-box
           class="my-article-box"
           :article="item"
           v-for="(item,i) in articles"
           :key="i"
+          :data-index="i"
         ></my-article-box>
       </div>
     </div>
@@ -15,6 +16,7 @@
 
 <script>
   import MyArticleBox from "../components/MyArticleBox";
+  import MyAnimation from "../components/MyAnimation";
 
   export default {
     name: "article-list",
@@ -24,19 +26,16 @@
       }
     },
     mounted() {
-      this.api.listArticles().then(res=>{
-        if(res.status === 200){
-          this.articles = res.data;
-        }
-      })
+      this.articles = this.getArticles();
     },
     watch: {
-      $route(){
+      $route() {
         console.log(this.$route.query["id"]);
       }
     },
     components: {
       "my-article-box": MyArticleBox,
+      "my-animation": MyAnimation
     }
   }
 </script>
@@ -55,6 +54,7 @@
     margin-top: 10px;
     transition: all .3s;
   }
+
   .my-article-box:hover {
     box-shadow: 0 8px 15px rgba(146, 146, 146, .39);
   }
@@ -63,7 +63,7 @@
     margin-top: 0;
   }
 
-  @media screen and (max-width: 800px){
+  @media screen and (max-width: 800px) {
     .article-boxes {
       width: 100%;
     }

@@ -3,13 +3,8 @@
     <div class="container">
       <my-article-detail-box
         class="my-article-detail-box"
-
+        :article="article"
       />
-<!--      :title="title"-->
-<!--      :date="date"-->
-<!--      :category="category"-->
-<!--      :content="content"-->
-<!--      :tags="tags"-->
     </div>
   </section>
 </template>
@@ -21,15 +16,14 @@
     props: ['id'],
     data() {
       return {
-        title: "",
-        date: "",
-        category: "",
-        content: "",
-        tags: []
+        article: {}
       }
     },
     mounted() {
-      console.log(this.id);
+      this.article = this.getArticleById(this.id);
+      setTimeout(()=>{
+        this.scrollAnimation(320, 20);
+      },300);
     },
     components: {
       "my-article-detail-box": MyArticleDetailBox
@@ -38,7 +32,18 @@
 </script>
 
 <style scoped>
+  .container {
+    display: flex;
+  }
+
   .my-article-detail-box {
-    padding-top: 20px;
+    flex: 1;
+    /*overflow: hidden;*/
+  }
+
+  @media screen and (max-width: 800px) {
+    .my-article-detail-box {
+      width: 100%;
+    }
   }
 </style>
