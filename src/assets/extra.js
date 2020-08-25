@@ -1,5 +1,4 @@
 function scrollAnimation(targetY, skip) {
-
   // 获取当前位置
   let currentY = document.documentElement.scrollTop || document.body.scrollTop
 

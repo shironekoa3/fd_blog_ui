@@ -1,47 +1,45 @@
 <template>
-  <article class="article-detail-box">
-    <div class="article-top-date">
-      <div class="month" v-text="month"></div>
-      <div class="day" v-text="day"></div>
-    </div>
-    <header>
-      <h1 class="article-title" v-text="title"></h1>
-      <div class="article-meta">
-        <div class="article-date">
-          <font-awesome-icon icon="calendar-alt"/>
-          <span>发表于</span>
-          <span v-text="date"></span>
-        </div>
-        <div class="article-category">
-          <font-awesome-icon icon="archive"/>
-          <span>分类为</span>
-          <span v-text="category"></span>
-        </div>
-        <div class="article-word-count">
-          <font-awesome-icon icon="file-word"/>
-          <span>字数统计</span>
-          <span v-text="wordCount"></span>
-        </div>
-        <div class="article-visitors-count">
-          <font-awesome-icon icon="eye"/>
-          <span>阅读量</span>
-          <span v-text="click_count"></span>
-        </div>
+    <article class="article-detail-box">
+      <div class="article-top-date">
+        <div class="month" v-text="month"></div>
+        <div class="day" v-text="day"></div>
       </div>
-    </header>
-    <div class="article-body">
-      <div class="article-img">
-        <img :src="img_url" alt="这里丢失了一张图片" v-if="img_url">
+      <header>
+        <h1 class="article-title" v-text="title"></h1>
+        <div class="article-meta">
+          <div class="article-date">
+            <font-awesome-icon icon="calendar-alt"/>
+            <span>发表于</span>
+            <span v-text="date"></span>
+          </div>
+          <div class="article-category">
+            <font-awesome-icon icon="archive"/>
+            <span>分类为</span>
+            <span v-text="category"></span>
+          </div>
+          <div class="article-word-count">
+            <font-awesome-icon icon="file-word"/>
+            <span>字数统计</span>
+            <span v-text="wordCount"></span>
+          </div>
+          <div class="article-visitors-count">
+            <font-awesome-icon icon="eye"/>
+            <span>阅读量</span>
+            <span v-text="click_count"></span>
+          </div>
+        </div>
+      </header>
+      <div class="article-body" id="article2">
+        <div class="article-img">
+          <img :src="img_url" alt="这里丢失了一张图片" v-if="img_url">
+        </div>
+        <p class="article-content" v-html="htmlContent" v-highlight></p>
       </div>
-      <p class="article-content" v-html="htmlContent" v-highlight></p>
-    </div>
-  </article>
+    </article>
 </template>
 
 <script>
-
   import marked from "marked"
-
   // let rendererMD = new marked.Renderer();
   marked.setOptions({
     "baseUrl": null,
@@ -110,10 +108,6 @@
         type: Object,
         default: () => {
         }
-      },
-      test: {
-        type: Number,
-        default: 0
       }
     }
   }
