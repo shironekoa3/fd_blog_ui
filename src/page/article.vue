@@ -54,8 +54,16 @@
     overflow: hidden;
   }
 
-
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 1300px) {
+    .my-article-nav {
+      width: 240px;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .my-article-nav {
+      width: 0;
+      margin-left: 0;
+    }
     .my-article-detail-box {
       width: 100%;
     }

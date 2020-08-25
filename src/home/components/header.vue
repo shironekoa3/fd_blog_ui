@@ -4,7 +4,6 @@
       <nav>
         <template v-for="(item,i) in navLinks">
           <!--          没有子菜单-->
-
           <template v-if="!item.children || item.children.length<=0">
             <router-link class="nav-link" :to="item.link" :key="i" v-if="item.type===0">
               <font-awesome-icon :icon="item.icon" v-if="item.icon.length>0"/>
@@ -15,14 +14,13 @@
               <span v-text="item.text"></span>
             </a>
           </template>
-
           <!--          有子菜单-->
           <div class="dropdown" v-else :key="i">
             <font-awesome-icon :icon="item.icon" v-if="item.icon.length>0"/>
             <span v-text="item.text"></span>
             <div class="dropdown-content" ref="dropdownContent">
               <template  v-for="(subItem, subI) in item.children" >
-                <router-link class="nav-link" to="/" :key="subI" v-if="subItem.type===0">
+                <router-link class="nav-link" :to="subItem.link" :key="subI" v-if="subItem.type===0">
                   <font-awesome-icon :icon="subItem.icon" v-if="subItem.icon.length>0"/>
                   <span v-text="subItem.text"></span>
                 </router-link>
@@ -57,6 +55,16 @@
             link: "https://www.baidu.com",
             text: "百度",
             icon: "home",
+            children: []
+          },
+          {
+            id: 5,
+            parentId: 3,
+            type: 0,
+            target: 0,
+            link: "/article/1",
+            text: "我的文章",
+            icon: "",
             children: []
           },
           {

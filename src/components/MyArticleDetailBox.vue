@@ -48,7 +48,7 @@
     "headerIds": true,
     "headerPrefix": "",
     "highlight": null,
-    "langPrefix": "language-",
+    "langPrefix": "",
     "mangle": true,
     "pedantic": false,
     "sanitize": false,
@@ -214,9 +214,42 @@
     overflow: hidden;
   }
 
+
   @media screen and (max-width: 650px) {
     .article-category {
       display: none;
     }
+  }
+
+  /**************************************** MARKDOWN 样式 ********************************************/
+  /deep/ .article-content h1 {
+    font-size: 1.8em;
+
+  }
+  /deep/ .article-content ol {
+    list-style-type: decimal;
+    padding-left: 30px;
+  }
+  /deep/ .article-content ul {
+    list-style-type: disc;
+    padding-left: 30px;
+  }
+  /deep/ .article-content img {
+    display: block;
+    margin: 10px auto;
+  }
+  /deep/ .article-content a {
+    color: #002C99;
+  }
+  /deep/ .article-content blockquote {
+    background-color: #fff3d4;
+    border-left: 5px solid #f6b73c;
+    margin: 10px 0;
+    padding: 5px 10px;
+  }
+  /deep/ .article-content p>code {
+    display: inline-block;
+    background-color: #fff3d4;
+    margin: 10px 0;
   }
 </style>
